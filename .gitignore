@@ -50,3 +50,6 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# for lib ename.c.inc
+lib/ename.c.inc
