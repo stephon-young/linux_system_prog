@@ -38,11 +38,12 @@
 - 通过上面可以看到:默认定义的只有两个宏: `_POSIX_SOURCE=1`和`_POSIX_C_SOURCE=200809L`
 - `_BSD_SOURCE`和`_SVID_SOURCE`在2.19之后就被废弃了。
 - `_POSIX_SOURCE`和`_POSIX_C_SOURCE`在不同的glibc版本有不同的值。
-- `_XOPEN_SOURCE`的值定义为500、600、700时分别对应SUSv2、SUSv3、SUSv4的支持，定义了三者的同时，将自动包含`_POSIX_C_SOURCE`的定义:
+- `_XOPEN_SOURCE`的值定义为500、600、700时分别对应SUSv2、SUSv3、SUSv4扩展的支持，定义了三者的同时，将自动包含`_POSIX_C_SOURCE`的定义:
   - 500: `_POSIX_C_SOURCE=199506L`
   - 600: `_POSIX_C_SOURCE=200112L`
   - 700: `_POSIX_C_SOURCE=200809L`
   - `_XOPEN_SOURCE`定义表明了不仅对posix支持，还对SUSvx的支持。
+  - 通常可以这样编译程序: `gcc -std=c99 -D_XOPEN_SOURCE=500/600/700 xxx.c` 分别对应500、600、700。
 
 #### 系统数据类型
 - 系统数据类型，***不同于***C语言的基本类型，考虑到在不同系统之间的可移植性，通常都是采用`typedef`来重新定义的类型，如: `pid_t`表示进程id。该类型在不同的平台上可能是不同的类型。通常如果我们需要考虑程序的可移植性，则需要用***标准的系统数据类型***,这些类型大多定义在`<sys/types.h>`中，也有少量定义在其他文件中。

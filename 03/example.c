@@ -9,7 +9,8 @@
 #include <string.h>
 #include <errno.h>
 
-// declare.
+// declare. if you don't declare, compiler will complain for warning: can't find the declare of reboot, so you 
+// should declare, it's implement will be linked auto.
 int reboot(int magic, int magic2, int cmd, void *arg);
 
 // define: 
