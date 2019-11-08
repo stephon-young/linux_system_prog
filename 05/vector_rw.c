@@ -148,6 +148,9 @@ int main() {
 
   if (!equal(&obj, &obj2))
     printf("not equal...\n");
+  else
+    printf("equal ad serialize and unserialize...\n");
+  
 
   return 0;
 }
