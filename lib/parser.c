@@ -40,7 +40,7 @@ parse(const char *fname, const char *arg, int flags, const char *name) {
   if ((flags & PSR_NONNEG) && res < 0)
     fail(fname, "negative value not allowed", arg, name);
 
-  if ((flags & PSR_GT_0) &&res <= 0)
+  if ((flags & PSR_GT_0) && res <= 0)
     fail(fname, "value must be > 0", arg, name);
 
   return res;
