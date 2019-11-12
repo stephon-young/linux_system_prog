@@ -147,6 +147,23 @@
   - 返回值: 0成功，非零失败，**注意** 并不是-1是失败。
   - **注意**: 函数的作用是添加一个新变量，或者修改一个已存在变量的值。
   - **注意**： glibc库对其做了扩展，如果传入的参数只有`name`，则将删除这个环境变量。
+- `setenv`函数也可以修改环境变量
+  - 原型: `int setenv(const char *name, const char *value, int overwrite); // <stdlib.h>`
+  - 参数: 
+    - name: 环境变量名
+    - value: 环境变量值
+    - overwrite: 当存在`name`环境变量时，是否覆盖。
+  - 返回值: 成功返回0，失败返回-1
+  - **注意**: name/value参数将会被拷贝到缓冲区，该缓冲区由setenv函数申请的，所以这两个参数并不像`putenv`那样，不能释放。
+- `unsetenv`函数用于移除某个环境变量:
+  - 原型: `int unsetenv(const char *name); // <stdlib.h>`
+  - 参数: name: 待移除的环境变量名
+  - 返回值: 0指示成功，-1失败。
+- `clearenv`函数用于清除整个环境列表，它是BSD特有的，需要定义`_BSD_SOURCE`宏，并不是SUSv3规范。
+  - 原型: `int clearenv(void); // _BSD_SOURCE <stdlib.h>`
+  - 返回值: 成功返回0，失败返回-1。
+  - **注意**: 反复调用`setenv`和`clearenv`将导致内存泄漏，但是通常程序并不会反复调用的情况，所以这一情况可以忽略。
+  - **注意**: 也可以直接将environ的值变为空，但是SUSv3规定，如果直接修改了environ为空，则getenv/putenv/setenv等函数的行为未定义。
 
 
   
