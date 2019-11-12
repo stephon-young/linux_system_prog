@@ -4,7 +4,8 @@
 #include "ename.c.inc"
 
 NORETURN
-static void terminate(Boolean useExit3) {
+static void terminate(Boolean useExit3)
+{
 	char *s;
 	s = getenv("EF_DUMPCORE");
 
@@ -17,7 +18,8 @@ static void terminate(Boolean useExit3) {
 }
 
 static void outputError(
-	Boolean useErr, int err, Boolean flushStdout, const char *format, va_list ap) {
+	Boolean useErr, int err, Boolean flushStdout, const char *format, va_list ap)
+{
 
 #define BUF_SIZE 500
 	char buf[BUF_SIZE], userMsg[BUF_SIZE], errText[BUF_SIZE];
@@ -25,9 +27,8 @@ static void outputError(
 	vsnprintf(userMsg, BUF_SIZE, format, ap);
 
 	if (useErr)
-		snprintf(errText, BUF_SIZE, " [%s %s]", 
-				(err > 0 && err <= MAX_ENAME) ?
-				ename[err] : "?UNKNOWN?", strerror(err));
+		snprintf(errText, BUF_SIZE, " [%s %s]",
+				 (err > 0 && err <= MAX_ENAME) ? ename[err] : "?UNKNOWN?", strerror(err));
 	else
 		snprintf(errText, BUF_SIZE, ":");
 
@@ -40,7 +41,8 @@ static void outputError(
 	fflush(stderr);
 }
 
-void errMsg(const char *format, ...) {
+void errMsg(const char *format, ...)
+{
 	va_list argList;
 	int savedErrno;
 
@@ -53,7 +55,8 @@ void errMsg(const char *format, ...) {
 	errno = savedErrno;
 }
 
-void errExit(const char *format, ...) {
+void errExit(const char *format, ...)
+{
 	va_list argList;
 
 	va_start(argList, format);
@@ -63,7 +66,8 @@ void errExit(const char *format, ...) {
 	terminate(TRUE);
 }
 
-void err_exit(const char *format, ...) {
+void err_exit(const char *format, ...)
+{
 	va_list argList;
 
 	va_start(argList, format);
@@ -73,7 +77,8 @@ void err_exit(const char *format, ...) {
 	terminate(FALSE);
 }
 
-void errExitEN(int errnum, const char *format, ...) {
+void errExitEN(int errnum, const char *format, ...)
+{
 	va_list argList;
 
 	va_start(argList, format);
@@ -83,7 +88,8 @@ void errExitEN(int errnum, const char *format, ...) {
 	terminate(TRUE);
 }
 
-void fatal(const char *format, ...) {
+void fatal(const char *format, ...)
+{
 	va_list argList;
 
 	va_start(argList, format);
@@ -93,7 +99,8 @@ void fatal(const char *format, ...) {
 	terminate(TRUE);
 }
 
-void usageErr(const char *format, ...) {
+void usageErr(const char *format, ...)
+{
 	va_list argList;
 
 	fflush(stdout);
@@ -107,7 +114,8 @@ void usageErr(const char *format, ...) {
 	exit(EXIT_FAILURE);
 }
 
-void cmdlineErr(const char *format, ...) {
+void cmdlineErr(const char *format, ...)
+{
 	va_list argList;
 
 	fflush(stdout);

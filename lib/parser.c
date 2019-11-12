@@ -6,8 +6,9 @@
 #include <errno.h>
 #include "parser.h"
 
-static void 
-fail(const char *fname, const char *msg, const char *arg, const char *name) {
+static void
+fail(const char *fname, const char *msg, const char *arg, const char *name)
+{
   fprintf(stderr, "%s error", fname);
   if (fname != NULL)
     fprintf(stderr, " (in %s)", name);
@@ -19,7 +20,8 @@ fail(const char *fname, const char *msg, const char *arg, const char *name) {
 }
 
 static long
-parse(const char *fname, const char *arg, int flags, const char *name) {
+parse(const char *fname, const char *arg, int flags, const char *name)
+{
   long res;
   char *endptr;
   int base;
@@ -46,13 +48,15 @@ parse(const char *fname, const char *arg, int flags, const char *name) {
   return res;
 }
 
-long getLong(const char *arg, int flags, const char *name) {
+long getLong(const char *arg, int flags, const char *name)
+{
   return parse("getLong", arg, flags, name);
 }
 
-int getInt(const char *arg, int flags, const char *name) {
+int getInt(const char *arg, int flags, const char *name)
+{
   long res;
-  
+
   res = parse("getInt", arg, flags, name);
   if (res > INT_MAX || res < INT_MIN)
     fail("getInt", "integer out of range", arg, name);
