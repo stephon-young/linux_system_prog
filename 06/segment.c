@@ -4,6 +4,9 @@
 // 显式的声明文本段、初始化数据段、未初始化数据段的结尾下一字节地址。
 extern char etext, edata, end;
 
+// environ变量的引用
+extern char **environ;
+
 char globalBuf[65536];
 int primes[] = {2, 3, 5, 7};
 
@@ -35,13 +38,22 @@ int main(int argc, char *argv[]) {
   static char mbuf[10240000];           // -rwxrwxrwx 1 aux aux 11584 Nov 11 12:25 mem_segment*
   char *p;
 
-  printf(".text segment end address: %10p\n", &etext);
-  printf(".data segment end address: %10p\n", &edata);
-  printf(".bss  segment end address: %10p\n", &end);
+  printf(".text end address: %10p\n", &etext);
+  printf(".data end address: %10p\n", &edata);
+  printf(".bss  end address: %10p\n", &end);
+
+  printf(".uninit   address: %10p\n", globalBuf);
+  printf(".init     address: %10p\n", primes);
+
+  printf("argument  address: %10p\n", argv[0]);
+  printf("environ   address: %10p\n", environ[0]);
 
   p = malloc(1024);
 
+  //int key = 9937;
   doCalc(key);
+
+  printf("sizeof(int) = %ld\n", sizeof(int));
 
   return 0;
 }
