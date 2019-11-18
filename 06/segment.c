@@ -13,6 +13,7 @@ int primes[] = {2, 3, 5, 7};
 static int square(int x) {
   int result;
   result = x * x;
+  printf("fun stack address: %10p\n", &result);
   return result;
 }
 
@@ -50,6 +51,8 @@ int main(int argc, char *argv[]) {
 
   p = malloc(1024);
 
+  printf("stack     address: %10p\n", &p);
+  printf("heap      address: %10p\n", p);
   //int key = 9937;
   doCalc(key);
 
